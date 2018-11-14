@@ -1,0 +1,23 @@
+{
+    "apps" : [
+    {
+        "name"        : "geth",
+        "cwd"         : "geth-linux-amd64-1.8.8-2688dab4",
+        "script"      : "geth",
+        "args"        : "--mine --ws --wsport=8576 --rpcaddr 0.0.0.0 --wsorigins=* --rpc --rpccorsdomain * --networkid 1488 --datadir ../blocknpay-bch --rpcapi web3,personal,eth,db,net --wsapi web3,personal,eth,db,net --port 0 --rpcport 8560",
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "env_production" : {
+         "NODE_ENV": "production"
+      }
+    },
+    {
+    "name"    : "api",
+    "cwd"     : "blocknpay-node/api",
+    "script"  : "npm",
+    "args"    : "start"
+    }
+  ]
+}
+  

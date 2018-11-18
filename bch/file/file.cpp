@@ -12,11 +12,11 @@ public:
   file(name receiver, name code,  datastream<const char*> ds): contract(receiver, code, ds) {}
 
   [[eosio::action]]
-  void add(uint64_t section_id, string name, string extension, uint64_t size, uint64_t created_at, uint64_t updated_at, string hash, uint64_t user_id, uint64_t size_real, string tags) 
+  void add(uint64_t id, uint64_t section_id, string name, string extension, uint64_t size, uint64_t created_at, uint64_t updated_at, string hash, uint64_t user_id, uint64_t size_real, string tags) 
   {
     file_index files(_code, _code.value);
     files.emplace("eosio"_n, [&]( auto& row ) {
-      row.id = files.available_primary_key();
+      row.id = id;
       row.section = section_id;
       row.name = name;
       row.extension = extension;

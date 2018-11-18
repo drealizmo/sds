@@ -16,7 +16,7 @@ public:
   {
     content_index cont(_code, _code.value);
     cont.emplace("eosio"_n, [&]( auto& row ) {
-          row.id = cont.available_primary_key();
+          row.id = id;
           row.name = name;
           row.section = section_id;
           row.created_at = created_at;
@@ -28,17 +28,21 @@ public:
   }
 
   [[eosio::action]]
-  void update(uint64_t id, string name, uint64_t updated_at, string tags, string content) 
+  void update(uint64_t id, uint64_t section_id, string name, uint64_t created_at, uint64_t updated_at, uint64_t user_id, string tags, string content) 
   {
     content_index cont(_code, _code.value);
     auto iterator = cont.find(id);
     if( iterator != cont.end() )
     {
       cont.modify(iterator, "eosio"_n, [&]( auto& row ) {
-            row.name = name;
-            row.updated_at = updated_at;
-            row.tags = tags;
-            row.content = content;
+          row.id = id;
+          row.name = name;
+          row.section = section_id;
+          row.created_at = created_at;
+          row.updated_at = updated_at;
+          row.user_id = user_id;
+          row.tags = tags;
+          row.content = content;
       });
     }
     else {

@@ -12,10 +12,10 @@ public:
   section(name receiver, name code,  datastream<const char*> ds): contract(receiver, code, ds) {}
 
   [[eosio::action]]
-  void add(string name, uint64_t size, uint64_t created_at, uint64_t updated_at, uint64_t user_id, string key) {
+  void add(uint64_t id, string name, uint64_t size, uint64_t created_at, uint64_t updated_at, uint64_t user_id, string key) {
     section_index sections(_code, _code.value);
     sections.emplace("eosio"_n, [&]( auto& row ) {
-      row.section_id = sections.available_primary_key();
+      row.section_id = id;
       row.name = name;
       row.created_at = created_at;
       row.updated_at = updated_at;
@@ -26,14 +26,19 @@ public:
   }
 
   [[eosio::action]]
-  void update(uint64_t section_id, string name, uint64_t updated_at) {
+  void update(uint64_t id, string name, uint64_t size, uint64_t created_at, uint64_t updated_at, uint64_t user_id, string key) {
     section_index sections(_code, _code.value);
-    auto iterator = sections.find(section_id);
+    auto iterator = sections.find(id);
     if( iterator != sections.end() )
     {
       sections.modify(iterator, "eosio"_n, [&]( auto& row ) {
+        row.section_id = id;
         row.name = name;
+        row.created_at = created_at;
         row.updated_at = updated_at;
+        row.user_id = user_id;
+        row.size = size;
+        row.key = key;
       });
     }
     else {

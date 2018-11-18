@@ -15,7 +15,7 @@ public:
   void add(uint64_t share_id, uint64_t section_id, uint64_t user_id, string username, uint64_t wallet, string key) {
     share_index shares(_code, _code.value);
     shares.emplace("eosio"_n, [&]( auto& row ) {
-      row.share_id = shares.available_primary_key();
+      row.share_id = share_id;
       row.section = section_id;
       row.user_id = user_id;
       row.username = username;

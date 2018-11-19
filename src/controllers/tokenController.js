@@ -1,82 +1,90 @@
-import _ from 'lodash';
-import config from "../../config";
 import Eos from 'eosjs';
 
-const eos = Eos(config);
+const eos = Eos({ keyProvider: ["5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"],
+httpEndpoint: 'http://127.0.0.1:8888',
+chainId: "4c9c536366159df1815c6262fb4a99e7d57c940c663fe10e2afdad066df3c558",
+expireInSeconds: 60,
+broadcast: true,
+debug: false,
+sign: true
+});
+const json = true;
 
 class tokenController {
 
 // SECTION
-    async createSection(req, res) {
-        if (!req.body.name || req.body.name.length == 0 || !req.body.key || req.body.key.length == 0 || isNan(parseInt(req.body.user_id))) res.sendStatus(400);
+    async createSection(req) {
+        if (!req.body.id || !req.body.name || !req.body.created_at || !req.body.size || !req.body.user_id || !req.body.key) throw new Error("Params are missing!");
         else
             try {
-                let name = req.body.name;
-                let key = req.body.key;
-                let user_id = req.body.user_id;
+                const data = {
+                    "id": req.body.id,
+                    "name": req.body.name,
+                    "size": req.body.size,
+                    "created_at": req.body.created_at,
+                    "updated_at": 0,
+                    "user_id": req.body.user_id,
+                    "key": req.body.key
+                }
                 let contract = await eos.contract('section');
-                let result = await contract.add(name, 0, new Date().getTime(), 0, user_id, key)
-                return result;
+                let result = await contract.add(data, { authorization: ["eosio@active"]});
+                return result.processed.action_traces[0].act.data;
             } catch (err) {
                 return err
             }
     }
 
-    // // eos.getTableRows({ code: contractName.toString(),
-    //  json: json, limit: limit, lower_bound: encodedName.toString(),
-    //   scope: contractName.toString(), table: tableName.toString(),
-    //    upper_bound: encodedName.plus(1).toString()})
-
-    async getSection() {
+    async getSection(req) {
         try {
-          let result = await eos.getTableRows({ code: "section", json: json, scope: "section", table: "sections" });
-          return result;
+            let result = await eos.getTableRows({ code: "section", json: json, scope: "section", table: "sections", lower_bound: req.params.id, upper_bound: req.params.id + 1 })
+            return result;
         } catch (err) {
-            return err
+            return err;
         }
     }
 
-    async mofidySection(req, res) {
-        if (!req.body.name || req.body.name.length == 0 || isNan(parseInt(req.body.id))) res.sendStatus(400);
+    async getSections() {
+        try {
+          let result = await eos.getTableRows({ code: "section", json: json, scope: "section", table: "sections"});
+          return result;
+        } catch (err) {
+            return err;
+        }
+    }
+
+
+
+    async mofidySection(req) {
+        if (!req.body.id || !req.body.name || !req.body.created_at || !req.body.size || !req.body.user_id || !req.body.key) throw new Error("Params are missing!");
         else
             try {
-                let id = req.body.id;
-                let name = req.body.name;
                 let contract = await eos.contract('section');
-                let result = await contract.update(id, name, new Date().getTime())
-                return result;
+                const data = {
+                    "id": req.body.id,
+                    "name": req.body.name,
+                    "size": req.body.size,
+                    "created_at": req.body.created_at,
+                    "updated_at": req.body.updated_at,
+                    "user_id": req.body.user_id,
+                    "key": req.body.key
+                }
+                let result = await contract.update(data, { authorization: ["eosio@active"]});
+                return result.processed.action_traces[0].act.data;
             } catch (err) {
-                res.sendStatus(500);
+                return err
             }
     }
 
-    async cloneSection(req, res) {
+    async deleteSection(req) {
         let id = req.params.id;
-        if (isNan(parseInt(id))) res.sendStatus(404);
-        else
-          try {
-            let result = [];
-            let section = await eos.getTableRows({ code: "section", json: json, limit: 1, lower_bound: id, scope: "section", table: "sections", upper_bound: id+1});
-            if (section) {
-                result = await contract.add(section.name, section.size, section.created_at, new Date().getTime(), section.user_id, section.key)
-            }
-            else {
-                res.sendStatus(404);
-            }
-            return result;
-          } catch (err) {
-          }
-    }
-
-    async deleteSection(req, res) {
-        let id = req.params.id;
-        if (isNan(parseInt(id))) res.sendStatus(404);
+        if (isNaN(parseInt(id))) throw new Error("Params are missing!")
         else
           try {
             let contract = await eos.contract('section');
-            let result = await contract.erase(id)            
-            return result;
+            let result = await contract.erase(id, { authorization: ["eosio@active"]})            
+            return result.processed.action_traces[0].act.data;
           } catch (err) {
+              return err;
           }
     }
 

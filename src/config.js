@@ -1,9 +1,9 @@
 module.exports = {
+  keyProvider: ["5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"],
+  httpEndpoint: 'http://127.0.0.1:8888',
+  chainId: "4c9c536366159df1815c6262fb4a99e7d57c940c663fe10e2afdad066df3c558",
   expireInSeconds: 60,
   broadcast: true,
   debug: false,
-  sign: true,
-  httpEndpoint: 'http://127.0.0.1:8888',
-  keyProvider: ['EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV','5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'],
-  chainId: "cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f"
+  sign: true
 }

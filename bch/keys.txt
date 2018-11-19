@@ -1,1 +1,0 @@
-nodeos --genesis-json genesis.json --delete-all-blocks

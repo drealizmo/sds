@@ -1,18 +1,14 @@
 import { Router } from 'express';
-import config from "../config";
 import tokenController from './controllers/tokenController';
 const routes = Router();
 
 const runAction = (action, req, res) =>  {
-    console.log('here')
     action(req, res)
       .then(data => {
-        console.log("Data : " + data);
         res.status(200).send(data);
         return;
       })
       .catch(err => {
-        console.log("Router: " + err);
         res
           .status(err.status || 400)
           .send({
@@ -26,10 +22,10 @@ const runAction = (action, req, res) =>  {
 
 // SECTION
 
-routes.post('/api/section', (req, res) => runAction(tokenController.modifySection, req, res));
-routes.post('/api/section/:id', (req, res) => runAction(tokenController.cloneSection, req, res));
-routes.get('/api/section/list', (req, res) => runAction(tokenController.getSection, req, res));
-routes.put('/api/section', (req, res) => runAction(tokenController.createSection, req, res));
+routes.put('/api/section', (req, res) => runAction(tokenController.mofidySection, req, res));
+routes.get('/api/section/list', (req, res) => runAction(tokenController.getSections, req, res));
+routes.get('/api/section/:id', (req, res) => runAction(tokenController.getSection, req, res));
+routes.post('/api/section', (req, res) => runAction(tokenController.createSection, req, res));
 routes.delete('/api/section/:id', (req, res) => runAction(tokenController.deleteSection, req, res));
 
 // SHARE

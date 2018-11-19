@@ -32,7 +32,6 @@ public:
     if( iterator != sections.end() )
     {
       sections.modify(iterator, "eosio"_n, [&]( auto& row ) {
-        row.section_id = id;
         row.name = name;
         row.created_at = created_at;
         row.updated_at = updated_at;
@@ -47,11 +46,16 @@ public:
   }
 
   [[eosio::action]]
-  void erase(const uint64_t section_id) {
+  void erase(uint64_t section_id) {
     section_index sections(_self, _code.value);
     auto iterator = sections.find(section_id);
-    eosio_assert(iterator == sections.end(), "Section does not exist");
-    sections.erase(iterator);
+    if (iterator != sections.end()) {
+      sections.erase(iterator);
+    }
+    else {
+      eosio_assert(iterator == sections.end(), "Section does not exist");
+    }
+    
   }
 
 private:

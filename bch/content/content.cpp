@@ -35,7 +35,6 @@ public:
     if( iterator != cont.end() )
     {
       cont.modify(iterator, "eosio"_n, [&]( auto& row ) {
-          row.id = id;
           row.name = name;
           row.section = section_id;
           row.created_at = created_at;

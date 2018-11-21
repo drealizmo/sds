@@ -31,23 +31,23 @@ routes.delete('/api/section/:id', (req, res) => runAction(tokenController.delete
 // SHARE
 
 routes.get('/api/share/list/:id', (req, res) => runAction(tokenController.getShareBySectionId, req, res));
-routes.put('/api/share', (req, res) => runAction(tokenController.shareSection, req, res));
-routes.delete('/api/section/:id', (req, res) => runAction(tokenController.deleteShare, req, res));
+routes.post('/api/share', (req, res) => runAction(tokenController.shareSection, req, res));
+routes.delete('/api/share/:id', (req, res) => runAction(tokenController.deleteShare, req, res));
 
 // CONTENT
 
-routes.post('/api/content', (req, res) => runAction(tokenController.modifyContent, req, res));
+routes.put('/api/content', (req, res) => runAction(tokenController.modifyContent, req, res));
 routes.get('/api/content/list/:id', (req, res) => runAction(tokenController.getContentList, req, res));
 routes.get('/api/content/:id', (req, res) => runAction(tokenController.getContent, req, res));
-routes.put('/api/content', (req, res) => runAction(tokenController.createContent, req, res));
+routes.post('/api/content', (req, res) => runAction(tokenController.createContent, req, res));
 routes.delete('/api/content/:id', (req, res) => runAction(tokenController.deleteContent, req, res));
 
 // FILE
 
-routes.get('/api/file/:id', (req, res) => runAction(tokenController.getContentList, req, res));
-routes.get('/api/file/list/:id', (req, res) => runAction(tokenController.getContent, req, res));
-routes.put('/api/content', (req, res) => runAction(tokenController.createContent, req, res));
-routes.delete('/api/file/:id', (req, res) => runAction(tokenController.deleteContent, req, res));
+routes.get('/api/file/:id', (req, res) => runAction(tokenController.getFile, req, res));
+routes.get('/api/file/list/:id', (req, res) => runAction(tokenController.getFiles, req, res));
+routes.post('/api/file', (req, res) => runAction(tokenController.createFile, req, res));
+routes.delete('/api/file/:id', (req, res) => runAction(tokenController.deleteFile, req, res));
 
 
 export default routes;

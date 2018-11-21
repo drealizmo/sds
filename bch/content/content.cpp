@@ -53,8 +53,12 @@ public:
   void erase(uint64_t id) {
     content_index cont(_code, _code.value);
     auto iterator = cont.find(id);
-    eosio_assert(iterator != cont.end(), "content does not exist");
-    cont.erase(iterator);
+    if (iterator != cont.end()) {
+      cont.erase(iterator);
+    }
+    else {
+      eosio_assert(iterator != cont.end(), "content does not exist");
+    }
   }
 
 private:

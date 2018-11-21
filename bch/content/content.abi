@@ -1,0 +1,160 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT Tue Nov 20 12:19:59 2018",
+    "version": "eosio::abi/1.1",
+    "structs": [
+        {
+            "name": "add",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "section_id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "name": "created_at",
+                    "type": "uint64"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "uint64"
+                },
+                {
+                    "name": "user_id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "tags",
+                    "type": "string"
+                },
+                {
+                    "name": "content",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "cont",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "section",
+                    "type": "uint64"
+                },
+                {
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "name": "created_at",
+                    "type": "uint64"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "uint64"
+                },
+                {
+                    "name": "user_id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "tags",
+                    "type": "string"
+                },
+                {
+                    "name": "content",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "erase",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                }
+            ]
+        },
+        {
+            "name": "update",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "section_id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "name",
+                    "type": "string"
+                },
+                {
+                    "name": "created_at",
+                    "type": "uint64"
+                },
+                {
+                    "name": "updated_at",
+                    "type": "uint64"
+                },
+                {
+                    "name": "user_id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "tags",
+                    "type": "string"
+                },
+                {
+                    "name": "content",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "types": [],
+    "actions": [
+        {
+            "name": "add",
+            "type": "add",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "erase",
+            "type": "erase",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "update",
+            "type": "update",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "cont",
+            "type": "cont",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "ricardian_clauses": [],
+    "variants": [],
+    "abi_extensions": []
+}

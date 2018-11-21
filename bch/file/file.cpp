@@ -35,8 +35,12 @@ public:
   void erase(const uint64_t id) {
     file_index files(_self, _code.value);
     auto iterator = files.find(id);
-    eosio_assert(iterator == files.end(), "File does not exist");
-    files.erase(iterator);
+    if (iterator != files.end()) {
+      files.erase(iterator);
+    }
+    else {
+      eosio_assert(iterator == files.end(), "File does not exist");
+    }
   }
 
 private:

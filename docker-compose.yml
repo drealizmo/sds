@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  eosio:
+    build: ./bch
+    container_name: eosio
+    restart: unless-stopped
+    # volumes:
+    #   - ./contracts:/root/eos:delegated
+    #   - ./data:/root/.local/share/eosio:delegated
+    ports:
+      - "4321:4321"
+      - "8888:8888"
+      - "9876:9876"
+    networks:
+      - appnet
+    command: ['nodeos', '--contracts-console', '--genesis-json /root/.local/share/eosio/nodeos/config/genesis.json']
+
+networks:
+  appnet:

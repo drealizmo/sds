@@ -1,0 +1,6 @@
+FROM node:8.11.4-jessie
+COPY . /home/node/app/
+WORKDIR /home/node/app/
+RUN npm install
+EXPOSE 8179
+CMD [ "npm", "start" ]

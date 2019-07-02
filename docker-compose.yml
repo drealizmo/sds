@@ -19,5 +19,16 @@ services:
 # volumes:
 #   bch:
 
+  nodejs:
+    build:
+      context: .
+      dockerfile: ./DockerfileNode
+    container_name: nodejs
+    restart: unless-stopped
+    ports:
+      - "8179:8179"
+    networks:
+      - appnet
+
 networks:
   appnet:

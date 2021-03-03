@@ -45,7 +45,7 @@
     "mongoose": "^5.0.12",
     "morgan": "^1.9.0",
     "node-fetch": "^2.2.0",
-    "pug": "^2.0.0-beta11",
+    "pug": "^3.0.1",
     "rimraf": "^2.6.2",
     "text-encoding": "^0.7.0",
     "uuid": "^3.2.1"

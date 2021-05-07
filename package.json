@@ -39,7 +39,7 @@
     "express": "^4.16.2",
     "generate-password": "^1.4.0",
     "jsonwebtoken": "^8.2.0",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.21",
     "moment": "^2.21.0",
     "mongodb": "^3.0.0",
     "mongoose": "^5.0.12",
